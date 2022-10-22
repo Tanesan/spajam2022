@@ -9,15 +9,18 @@ class TitleComponent extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
             Widget>[
-          Stack(children: <Widget>[
-            Text('クイズ！',
-                style: Theme.of(context).textTheme.headline3?.copyWith(
-                    foreground: Paint()
-                      ..style = PaintingStyle.stroke
-                      ..strokeWidth = 6
-                      ..color = Colors.white)),
-            Text('クイズ！', style: Theme.of(context).textTheme.headline3),
-          ]),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+            child: Stack(children: <Widget>[
+              Text('クイズ！',
+                  style: Theme.of(context).textTheme.headline3?.copyWith(
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 6
+                        ..color = Colors.white)),
+              Text('クイズ！', style: Theme.of(context).textTheme.headline3),
+            ]),
+          ),
           Row(
             children: [
               Stack(children: <Widget>[
