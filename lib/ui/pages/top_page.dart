@@ -22,23 +22,19 @@ class _TopPageState extends State<TopPage> {
       Scaffold(
           body: Center(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 120, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TitleComponent(),
+              const TitleComponent(),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
                 child: Center(
                   child: OutlinedButton(
-                    child: Container(
-                        width: 190,
-                        height: 40,
-                        child: Center(child: Text('はじめる'))),
                     style: OutlinedButton.styleFrom(
-                      primary: Colors.white,
-                      backgroundColor: Color(0xffCF9090),
-                      side: BorderSide(color: Color(0xffCF9090)),
+                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xffCF9090),
+                      side: const BorderSide(color: Color(0xffCF9090)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
@@ -46,6 +42,10 @@ class _TopPageState extends State<TopPage> {
                     onPressed: () {
                       Navigator.of(context).pushNamed('/home');
                     },
+                    child: Container(
+                        width: 190,
+                        height: 40,
+                        child: Center(child: Text('はじめる'))),
                   ),
                 ),
               ),
