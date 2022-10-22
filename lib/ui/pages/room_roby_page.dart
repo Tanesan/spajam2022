@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants.dart';
 import '../components/header_customized.dart';
 import '../components/text_field_custom.dart';
 
@@ -35,7 +36,7 @@ class _RoomRobyPageState extends State<RoomRobyPage> {
                   TextFieldCustom(
                       suffix: "コピー",
                       hintText: "ルームID",
-                      InputController: TextEditingController(text: "1234"),
+                      InputController: TextEditingController(text: "a43yf89"),
                       onPressed: () => null),
                 ],
               ),
@@ -60,14 +61,16 @@ class _RoomRobyPageState extends State<RoomRobyPage> {
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
-                              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                              child: TextFieldCustom(
+                                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                child: TextFieldCustom(
                                   hintText: "ルームID",
                                   onPressed: () {},
                                   InputController:
                                       TextEditingController(text: "1234"),
-                                  prefixIcon: Icons.search),
-                            );
+                                  prefixIcon: CircleAvatar(
+                                      backgroundColor: Colors.transparent,
+                                      child: Constants.avatars[index]),
+                                ));
                           }),
                     ),
                   ],
