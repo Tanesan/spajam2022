@@ -3,8 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:spajam2022/ui/pages/home_page.dart';
 import 'package:spajam2022/ui/pages/room_enter_page.dart';
 import 'package:spajam2022/ui/pages/room_roby_page.dart';
-
-import 'ui/pages/top_page.dart';
+import 'package:spajam2022/ui/pages/writing_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -75,11 +74,12 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   letterSpacing: 1.5),
             )),
-        home: const TopPage(),
+        home: WritingPage(),
         routes: <String, WidgetBuilder>{
           '/home': (BuildContext context) => HomePage(),
           '/roomenter': (BuildContext context) => RoomEnterPage(),
           '/roomroby': (BuildContext context) => RoomRobyPage(),
+          '/writing': (BuildContext context) => const WritingPage(),
         });
   }
 }
