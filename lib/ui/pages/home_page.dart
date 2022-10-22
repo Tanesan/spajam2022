@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/title_encode.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -17,36 +19,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('クイズ！', style: Theme.of(context).textTheme.headline3),
-                  Row(
-                    children: [
-                      Text('この', style: Theme.of(context).textTheme.headline3),
-                      Text('漢字',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline3
-                              ?.copyWith(color: Color(0xffFCC6E6E))),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('どんな', style: Theme.of(context).textTheme.headline3),
-                      Text('感じ',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline3
-                              ?.copyWith(color: Color(0xff5585E2))),
-                      Text('？', style: Theme.of(context).textTheme.headline3),
-                    ],
-                  )
-                ],
-              ),
-            ),
+            TitleComponent(),
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
               child: Center(
@@ -66,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/home');
+                        Navigator.of(context).pushNamed('/roomroby');
                       },
                     ),
                     Padding(
@@ -83,7 +56,9 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(6),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/roomenter');
+                        },
                       ),
                     ),
                   ],

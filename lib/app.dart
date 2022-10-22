@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:spajam2022/ui/pages/home_page.dart';
-import 'package:spajam2022/ui/pages/writing_page.dart';
+import 'package:spajam2022/ui/pages/room_enter_page.dart';
+import 'package:spajam2022/ui/pages/room_roby_page.dart';
+
+import 'ui/pages/top_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -29,12 +32,15 @@ class MyApp extends StatelessWidget {
                   color: Colors.black,
                   fontWeight: FontWeight.w600),
               headline4: GoogleFonts.shipporiMincho(
-                  fontSize: 28,
+                  fontSize: 36,
                   color: Colors.black,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 0.25),
               headline5: GoogleFonts.shipporiMincho(
-                  fontSize: 24, fontWeight: FontWeight.w400),
+                  fontSize: 28,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.25),
               headline6: GoogleFonts.shipporiMincho(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
@@ -69,9 +75,11 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   letterSpacing: 1.5),
             )),
-        home: WritingPage(),
+        home: const TopPage(),
         routes: <String, WidgetBuilder>{
-          '/home': (BuildContext context) => const HomePage(),
+          '/home': (BuildContext context) => HomePage(),
+          '/roomenter': (BuildContext context) => RoomEnterPage(),
+          '/roomroby': (BuildContext context) => RoomRobyPage(),
         });
   }
 }
