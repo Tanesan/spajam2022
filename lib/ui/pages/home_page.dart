@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spajam2022/ui/components/increment_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
