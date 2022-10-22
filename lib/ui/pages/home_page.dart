@@ -64,18 +64,43 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
                   child: Center(
-                    child: ElevatedButton(
-                      child: Container(
-                          width: 190,
-                          height: 40,
-                          child: Center(child: Text('はじめる'))),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xffCF9090),
-                        onPrimary: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/home');
-                      },
+                    child: Column(
+                      children: [
+                        OutlinedButton(
+                          child: Container(
+                              width: 190,
+                              height: 40,
+                              child: Center(child: Text('ルームを作成'))),
+                          style: OutlinedButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color(0xffCF9090),
+                            side: BorderSide(color: Color(0xffCF9090)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/home');
+                          },
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          child: OutlinedButton(
+                            child: Container(
+                                width: 190,
+                                height: 40,
+                                child: Center(child: Text('ルームに参加'))),
+                            style: OutlinedButton.styleFrom(
+                              primary: Color(0xffCF9090),
+                              side: BorderSide(color: Color(0xffCF9090)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

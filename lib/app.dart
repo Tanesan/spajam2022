@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spajam2022/ui/pages/chose_room.dart';
+import 'package:spajam2022/ui/pages/home_page.dart';
 import 'package:spajam2022/ui/styles/app_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'ui/pages/top_page.dart';

@@ -46,16 +46,22 @@ class _TopPageState extends State<TopPage> {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
               child: Center(
-                child: ElevatedButton(
+                child:  OutlinedButton(
                   child: Container(
                       width: 190,
                       height: 40,
                       child: Center(child: Text('はじめる'))),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xffCF9090),
-                    onPrimary: Colors.white,
+                  style: OutlinedButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Color(0xffCF9090),
+                    side: BorderSide(color: Color(0xffCF9090)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
                   ),
-                  onPressed: () {Navigator.of(context).pushNamed('/home');},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/home');
+                  },
                 ),
               ),
             ),
