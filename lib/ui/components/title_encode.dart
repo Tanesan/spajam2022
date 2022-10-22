@@ -73,17 +73,20 @@ class TitleComponent extends StatelessWidget {
                         .headline3
                         ?.copyWith(color: Color(0xff5585E2)))
               ]),
-              Stack(
-                children: <Widget>[
-                  Text('？',
-                      style: Theme.of(context).textTheme.headline3?.copyWith(
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 6
-                            ..color = Colors.white)),
-                  Text('？', style: Theme.of(context).textTheme.headline3),
-                ],
-              )
+              Transform.rotate(
+                  angle: .5,
+                  child: Stack(
+                    children: <Widget>[
+                      Text('？',
+                          style:
+                              Theme.of(context).textTheme.headline3?.copyWith(
+                                  foreground: Paint()
+                                    ..style = PaintingStyle.stroke
+                                    ..strokeWidth = 6
+                                    ..color = Colors.white)),
+                      Text('？', style: Theme.of(context).textTheme.headline3),
+                    ],
+                  )),
             ],
           ),
         ]));
