@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spajam2022/ui/components/increment_button.dart';
-
-
+import 'package:spajam2022/ui/styles/app_color.dart';
 
 class TopPage extends StatefulWidget {
   const TopPage({Key? key}) : super(key: key);
@@ -11,7 +9,6 @@ class TopPage extends StatefulWidget {
 }
 
 class _TopPageState extends State<TopPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +27,21 @@ class _TopPageState extends State<TopPage> {
                   Row(
                     children: [
                       Text('この', style: Theme.of(context).textTheme.headline3),
-                      Text('漢字', style: Theme.of(context).textTheme.headline3?.copyWith(color: Color(0xffFCC6E6E))),
+                      Text('漢字',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline3
+                              ?.copyWith(color: Color(0xffFCC6E6E))),
                     ],
                   ),
                   Row(
                     children: [
                       Text('どんな', style: Theme.of(context).textTheme.headline3),
-                      Text('感じ', style: Theme.of(context).textTheme.headline3?.copyWith(color: Color(0xff5585E2))),
+                      Text('感じ',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline3
+                              ?.copyWith(color: Color(0xff5585E2))),
                       Text('？', style: Theme.of(context).textTheme.headline3),
                     ],
                   )
@@ -46,15 +51,15 @@ class _TopPageState extends State<TopPage> {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
               child: Center(
-                child:  OutlinedButton(
+                child: OutlinedButton(
                   child: Container(
                       width: 190,
                       height: 40,
                       child: Center(child: Text('はじめる'))),
                   style: OutlinedButton.styleFrom(
                     primary: Colors.white,
-                    backgroundColor: Color(0xffCF9090),
-                    side: BorderSide(color: Color(0xffCF9090)),
+                    backgroundColor: AppColor.primary,
+                    side: const BorderSide(color: AppColor.primary),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
                     ),
