@@ -4,7 +4,7 @@ class TextFieldCustom extends StatelessWidget {
   final String? suffix;
   final String hintText;
   final Function onPressed;
-  final IconData? prefixIcon;
+  final Widget? prefixIcon;
   final TextEditingController? InputController;
 
   TextFieldCustom(
@@ -35,7 +35,7 @@ class TextFieldCustom extends StatelessWidget {
           controller: InputController ?? null,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.fromLTRB(14, 10, 0, 10),
-            prefixIcon: this.prefixIcon != null ? Icon(this.prefixIcon) : null,
+            prefixIcon: this.prefixIcon != null ? this.prefixIcon : null,
             fillColor: Colors.white,
             filled: true,
             focusColor: Colors.white,
