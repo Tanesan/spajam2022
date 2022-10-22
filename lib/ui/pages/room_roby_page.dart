@@ -35,8 +35,8 @@ class _RoomRobyPageState extends State<RoomRobyPage> {
                   TextFieldCustom(
                       suffix: "コピー",
                       hintText: "ルームID",
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed('/roomroby')),
+                      InputController: TextEditingController(text: "1234"),
+                      onPressed: () => null),
                 ],
               ),
               Padding(
@@ -52,16 +52,23 @@ class _RoomRobyPageState extends State<RoomRobyPage> {
                         ],
                       ),
                     ),
-                    TextFieldCustom(hintText: "ルームID", onPressed: () {}),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      child:
-                          TextFieldCustom(hintText: "ルームID", onPressed: () {}),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      child:
-                          TextFieldCustom(hintText: "ルームID", onPressed: () {}),
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: ListView.builder(
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          itemCount: 2,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              child: TextFieldCustom(
+                                  hintText: "ルームID",
+                                  onPressed: () {},
+                                  InputController:
+                                      TextEditingController(text: "1234"),
+                                  prefixIcon: Icons.search),
+                            );
+                          }),
                     ),
                   ],
                 ),
