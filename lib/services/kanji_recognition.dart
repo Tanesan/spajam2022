@@ -5,7 +5,7 @@ class KanjiRecognition {
 }
 
 class KanjiRecognitionResult {
-  late final String text;
+  final String text;
 
   KanjiRecognitionResult({required this.text});
 }
