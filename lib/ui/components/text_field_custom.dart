@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class TextFieldCustom extends StatelessWidget {
   final String? suffix;
   final String hintText;
-  final Function? onPressed;
+  final Function onPressed;
 
   TextFieldCustom(
-      {Key? key, this.suffix, this.onPressed, required this.hintText})
+      {Key? key, this.suffix, required this.onPressed, required this.hintText})
       : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class TextFieldCustom extends StatelessWidget {
             fillColor: Colors.white,
         focusColor: Colors.white,
         suffix: TextButton(
-            child: Text(this.suffix ?? ""), onPressed: () => onPressed ?? null),
+            child: Text(this.suffix ?? ""), onPressed: () => onPressed()),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(

@@ -52,14 +52,16 @@ class _RoomRobyPageState extends State<RoomRobyPage> {
                         ],
                       ),
                     ),
-                    TextFieldCustom(hintText: "ルームID"),
+                    TextFieldCustom(hintText: "ルームID", onPressed: () {}),
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      child: TextFieldCustom(hintText: "ルームID"),
+                      child:
+                          TextFieldCustom(hintText: "ルームID", onPressed: () {}),
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      child: TextFieldCustom(hintText: "ルームID"),
+                      child:
+                          TextFieldCustom(hintText: "ルームID", onPressed: () {}),
                     ),
                   ],
                 ),
