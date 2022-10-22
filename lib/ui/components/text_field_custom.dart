@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TextFieldCustom extends StatelessWidget {
-  const TextFieldCustom({Key? key}) : super(key: key);
+  final String? suffix;
+  final String hintText;
+  final Function onPressed;
+
+  TextFieldCustom(
+      {Key? key, this.suffix, required this.onPressed, required this.hintText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +26,10 @@ class TextFieldCustom extends StatelessWidget {
       ),
       child: TextFormField(
           decoration: InputDecoration(
-        fillColor: Colors.white,
+            fillColor: Colors.white,
         focusColor: Colors.white,
-        suffix: Text('確定'),
+        suffix: TextButton(
+            child: Text(this.suffix ?? ""), onPressed: () => onPressed()),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
@@ -33,7 +40,7 @@ class TextFieldCustom extends StatelessWidget {
             .textTheme
             .headline5
             ?.copyWith(color: Color(0xffC0C0C0)),
-        hintText: 'ルームIDを入力',
+        hintText: this.hintText,
       )),
     );
   }

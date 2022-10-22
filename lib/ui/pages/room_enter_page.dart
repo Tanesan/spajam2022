@@ -19,7 +19,10 @@ class _RoomEnterPageState extends State<RoomEnterPage> {
         HeaderCustomized(title: "ルーム参加"),
         Padding(
           padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-          child: TextFieldCustom(),
+          child: TextFieldCustom(
+              suffix: "確定",
+              hintText: "ルームIDを入力",
+              onPressed: () => Navigator.of(context).pushNamed('/roomroby')),
         )
       ],
     ));
