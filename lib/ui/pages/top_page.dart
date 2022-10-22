@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spajam2022/ui/components/increment_button.dart';
-
-
 
 class TopPage extends StatefulWidget {
   const TopPage({Key? key}) : super(key: key);
@@ -11,18 +8,17 @@ class TopPage extends StatefulWidget {
 }
 
 class _TopPageState extends State<TopPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0, 120, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -30,31 +26,44 @@ class _TopPageState extends State<TopPage> {
                   Row(
                     children: [
                       Text('この', style: Theme.of(context).textTheme.headline3),
-                      Text('漢字', style: Theme.of(context).textTheme.headline3?.copyWith(color: Color(0xffFCC6E6E))),
+                      Text('漢字',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline3
+                              ?.copyWith(color: const Color(0xfffcc6e6e))),
                     ],
                   ),
                   Row(
                     children: [
                       Text('どんな', style: Theme.of(context).textTheme.headline3),
-                      Text('感じ', style: Theme.of(context).textTheme.headline3?.copyWith(color: Color(0xff5585E2))),
+                      Text('感じ',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline3
+                              ?.copyWith(color: const Color(0xff5585E2))),
                       Text('？', style: Theme.of(context).textTheme.headline3),
                     ],
                   )
                 ],
               ),
             ),
+            // NOTE: 動作確認用
+            // ElevatedButton(
+            //   onPressed: () {
+            //     showDialog(
+            //         context: context,
+            //         builder: (_) => const ResultDialog(title: "AI予想..."));
+            //   },
+            //   child: const Text('Show Modal'),
+            // ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
               child: Center(
-                child:  OutlinedButton(
-                  child: Container(
-                      width: 190,
-                      height: 40,
-                      child: Center(child: Text('はじめる'))),
+                child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Color(0xffCF9090),
-                    side: BorderSide(color: Color(0xffCF9090)),
+                    foregroundColor: Colors.white,
+                    backgroundColor: const Color(0xffCF9090),
+                    side: const BorderSide(color: Color(0xffCF9090)),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
                     ),
@@ -62,6 +71,10 @@ class _TopPageState extends State<TopPage> {
                   onPressed: () {
                     Navigator.of(context).pushNamed('/home');
                   },
+                  child: const SizedBox(
+                      width: 190,
+                      height: 40,
+                      child: Center(child: Text('はじめる'))),
                 ),
               ),
             ),
