@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "20338719985",
+    "firebase_url": "https://spajam2022-125e3-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "spajam2022-125e3",
+    "storage_bucket": "spajam2022-125e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20338719985:android:2e78b947c5da97639efd50",
+        "android_client_info": {
+          "package_name": "io.quiz.amaikanji.spajam2022"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20338719985-aam1cbsmadvnr6iatq3n09so7ti4oh18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSUXV44S3ieJwzN8OIC4l2BFosFTrcN8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20338719985-aam1cbsmadvnr6iatq3n09so7ti4oh18.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "20338719985-thft8p2uushk870rusv301i7prf96mb9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.quiz.amaikanji.spajam2022"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
