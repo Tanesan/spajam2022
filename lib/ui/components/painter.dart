@@ -101,19 +101,12 @@ class _CustomPainter extends CustomPainter {
 }
 
 class PaintController extends ChangeNotifier {
-  // ペイント履歴
-  PaintHistory _paintHistory = PaintHistory();
-
+  final _paintHistory = PaintHistory();
   get paintHistory => _paintHistory;
 
-  // 線の色
-  Color _drawColor = Color.fromARGB(255, 0, 0, 0);
-
-  // 線幅
-  double _thickness = 5.0;
-
-  // 背景色
-  Color _backgroundColor = Color.fromARGB(255, 255, 255, 255);
+  final _drawColor = Color.fromARGB(255, 0, 0, 0);
+  final double _thickness = 10.0;
+  final _backgroundColor = Color.fromARGB(255, 255, 255, 255);
 
   /*
    * コンストラクタ
