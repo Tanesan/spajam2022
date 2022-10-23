@@ -7,7 +7,7 @@ class TextFieldCustom extends StatelessWidget {
   final Widget? prefixIcon;
   final TextEditingController? InputController;
 
-  TextFieldCustom(
+  const TextFieldCustom(
       {Key? key,
       this.suffix,
       required this.onPressed,
@@ -27,32 +27,41 @@ class TextFieldCustom extends StatelessWidget {
             spreadRadius: 2,
             blurRadius: 8,
             color: Colors.grey.withOpacity(0.5),
-            offset: Offset(2, 2),
+            offset: const Offset(2, 2),
           ),
         ],
       ),
       child: TextFormField(
-          controller: InputController ?? null,
+          controller: InputController,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.fromLTRB(14, 10, 0, 10),
-            prefixIcon: this.prefixIcon != null ? this.prefixIcon : null,
-            fillColor: Colors.white,
-            filled: true,
-            focusColor: Colors.white,
-            suffix: TextButton(
-                child: Text(this.suffix ?? ""), onPressed: () => onPressed()),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: Color(0xffEBEBEB),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(
+                  color: Color(0xffEBEBEB),
+                ),
               ),
-            ),
-            helperStyle: Theme.of(context)
-                .textTheme
-                .headline5
-                ?.copyWith(color: Color(0xffC0C0C0)),
-            hintText: this.hintText,
-          )),
+              contentPadding: const EdgeInsets.fromLTRB(14, 10, 0, 10),
+              prefixIcon: prefixIcon,
+              fillColor: Colors.white,
+              filled: true,
+              focusColor: Colors.white,
+              suffix: TextButton(
+                  child: Text(suffix ?? ""), onPressed: () => onPressed()),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(
+                  color: Color(0xffEBEBEB),
+                ),
+              ),
+              helperStyle: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  ?.copyWith(color: const Color(0xffEBEBEB)),
+              hintText: hintText,
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  ?.copyWith(color: const Color.fromARGB(255, 196, 196, 196)))),
     );
   }
 }

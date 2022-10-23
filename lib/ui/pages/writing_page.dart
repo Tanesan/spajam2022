@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:spajam2022/ui/components/text_field_custom.dart';
 import 'package:spajam2022/ui/styles/app_color.dart';
 
 import '../../constants.dart';
@@ -12,6 +13,7 @@ class WritingPage extends StatefulWidget {
   static const routeName = '/writing';
 
   final _controller = PaintController();
+  bool isWritingConfirmed = false;
 
   @override
   State<WritingPage> createState() => _WritingPageState();
@@ -42,6 +44,8 @@ class _WritingPageState extends State<WritingPage> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
+
+    const isWriter = false;
 
     return Scaffold(
       body: Column(
@@ -107,92 +111,144 @@ class _WritingPageState extends State<WritingPage> {
             ),
           ),
           const SizedBox(height: 20),
-          Expanded(
-            child: Container(
-              color: AppColor.primary,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 80),
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 50),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
+          if (isWriter) ...[
+            Expanded(
+              child: Container(
+                color: AppColor.primary,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 80),
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 50),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "お題",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(color: Colors.black45),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Center(
+                          child: Text.rich(TextSpan(
+                              text: problemPrefix,
+                              style: Theme.of(context).textTheme.headline4,
+                              children: [
+                                TextSpan(
+                                  text: " $problem ",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline4
+                                      ?.copyWith(
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                ),
+                                TextSpan(
+                                  text: problemSuffix,
+                                  style: Theme.of(context).textTheme.headline4,
+                                )
+                              ])),
+                        )
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            "お題",
+                ),
+              ),
+            ),
+            Container(
+              color: AppColor.primary,
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                          child: Text(
+                            "あなたが書く番です",
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
                                 ?.copyWith(color: Colors.black45),
                           ),
-                        ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: deviceSize.width,
+                      height: deviceSize.width * 0.9,
+                      child: Painter(
+                        paintController: widget._controller,
+                        index: index,
                       ),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: Text.rich(TextSpan(
-                            text: problemPrefix,
-                            style: Theme.of(context).textTheme.headline4,
-                            children: [
-                              TextSpan(
-                                text: " $problem ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline4
-                                    ?.copyWith(
-                                      decoration: TextDecoration.underline,
-                                    ),
-                              ),
-                              TextSpan(
-                                text: problemSuffix,
-                                style: Theme.of(context).textTheme.headline4,
-                              )
-                            ])),
-                      )
-                    ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ] else ...[
+            Container(
+              padding: const EdgeInsets.all(20),
+              color: AppColor.primary,
+              child: SizedBox(
+                width: deviceSize.width,
+                height: deviceSize.width * 0.6,
+                child: Container(
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Painter(
+                    paintController: widget._controller,
+                    index: index,
                   ),
                 ),
               ),
             ),
-          ),
-          Container(
-            color: AppColor.primary,
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                color: Colors.white,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        child: Text(
-                          "あなたが書く番です",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              ?.copyWith(color: Colors.black45),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: deviceSize.width,
-                    height: deviceSize.width * 0.9,
-                    child: Painter(
-                      paintController: widget._controller,
-                      index: index,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+            Expanded(
+                child: Container(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 50),
+              color: AppColor.primary,
+              child: Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox(
+                      width: double.infinity,
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                              width: double.infinity,
+                              child: TextFieldCustom(
+                                  onPressed: () {}, hintText: "漢字を入力")),
+                          Positioned(
+                            right: 0,
+                            child: TextButton(
+                                onPressed: widget.isWritingConfirmed
+                                    ? null
+                                    : () {
+                                        setState(() {
+                                          widget.isWritingConfirmed = true;
+                                        });
+                                      },
+                                child: widget.isWritingConfirmed
+                                    ? const Text("確定済み")
+                                    : const Text("確定")),
+                          )
+                        ],
+                      ))),
+            ))
+          ]
         ],
       ),
     );
