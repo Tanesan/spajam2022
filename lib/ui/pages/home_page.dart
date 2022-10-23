@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
                                   height: 40,
                                   child: Center(child: Text('ルームに参加'))),
                               style: OutlinedButton.styleFrom(
-                                primary: Color(0xffCF9090),
-                                side: BorderSide(color: Color(0xffCF9090)),
+                                primary: Colors.white,
+                                side: BorderSide(color: Colors.white),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6),
                                 ),
