@@ -122,7 +122,7 @@ class _RoomRobyPageState extends State<RoomRobyPage> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/home');
+                        Navigator.of(context).pushNamed('/writing');
                       },
                       child: const SizedBox(
                         width: 190,
