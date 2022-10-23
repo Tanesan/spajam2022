@@ -4,10 +4,14 @@ import 'package:spajam2022/ui/components/result/users_grid.dart';
 
 class ResultDialog extends StatelessWidget {
   const ResultDialog(
-      {super.key, required this.title, this.titleAlignStart = false});
+      {super.key,
+      required this.title,
+      this.titleAlignStart = false,
+      this.showStampLabel = false});
 
   final String title;
   final bool titleAlignStart;
+  final bool showStampLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -48,23 +52,24 @@ class ResultDialog extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 64),
-                    child: Text("断捨離",
+                    child: Text("鬱",
                         style: Theme.of(context)
                             .textTheme
                             .headline3!
                             .copyWith(color: const Color(0xFFFC8484))),
                   ),
-                  Positioned(
-                      top: 0,
-                      right: 0,
-                      child: Transform.translate(
-                        offset: const Offset(-0.5, 0),
-                        child: Transform.rotate(
-                            angle: 0.2,
-                            child: const CorrectBatch(
-                              isCorrect: false,
-                            )),
-                      ))
+                  if (showStampLabel)
+                    Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Transform.translate(
+                          offset: const Offset(-0.5, 0),
+                          child: Transform.rotate(
+                              angle: 0.2,
+                              child: const CorrectBatch(
+                                isCorrect: false,
+                              )),
+                        ))
                 ],
               ),
               const SizedBox(height: 60),

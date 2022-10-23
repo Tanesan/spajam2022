@@ -6,25 +6,43 @@ class UsersGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (Column(
-        children: [1, 2]
-            .map(
-              (_) => SizedBox(
-                width: double.infinity,
-                child: Row(
-                    children: [1, 2]
-                        .map(
-                          (i) => Expanded(
-                            child: UsersGridItem(
-                              value: "断捨離",
-                              isQuestioner: i == 1,
-                              emphasisBorder: i != 1,
-                            ),
-                          ),
-                        )
-                        .toList()),
+    return (Column(children: [
+      SizedBox(
+          width: double.infinity,
+          child: Row(children: const <Widget>[
+            Expanded(
+              child: UsersGridItem(
+                value: "鬱",
+                isQuestioner: false,
+                emphasisBorder: true,
+              ),
+            ),
+            Expanded(
+              child: UsersGridItem(
+                value: "林",
+                isQuestioner: false,
+                emphasisBorder: false,
               ),
             )
-            .toList()));
+          ])),
+      SizedBox(
+          width: double.infinity,
+          child: Row(children: const <Widget>[
+            Expanded(
+              child: UsersGridItem(
+                value: "無",
+                isQuestioner: false,
+                emphasisBorder: false,
+              ),
+            ),
+            Expanded(
+              child: UsersGridItem(
+                value: "缶",
+                isQuestioner: false,
+                emphasisBorder: false,
+              ),
+            )
+          ]))
+    ]));
   }
 }

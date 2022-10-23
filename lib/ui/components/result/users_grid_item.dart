@@ -52,8 +52,8 @@ class UsersGridItem extends StatelessWidget {
               right: 6,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  SizedBox(
+                children: [
+                  const SizedBox(
                       width: 30,
                       height: 30,
                       child: CircleAvatar(
@@ -61,10 +61,11 @@ class UsersGridItem extends StatelessWidget {
                           "https://precious.ismcdn.jp/mwimgs/c/3/1080/img_c329b2977f0c543bb74a7e1b39dbfa47698703.jpg",
                         ),
                       )),
-                  AwardBatch(
-                    "正解",
-                    postFix: " +1",
-                  )
+                  if (emphasisBorder)
+                    const AwardBatch(
+                      "正解",
+                      postFix: " +1",
+                    )
                 ],
               ))
         ],

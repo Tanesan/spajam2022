@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:spajam2022/ui/components/result/result_dialog.dart';
 import 'package:spajam2022/ui/components/text_field_custom.dart';
 import 'package:spajam2022/ui/styles/app_color.dart';
 
@@ -14,6 +15,7 @@ class WritingPage extends StatefulWidget {
 
   final _controller = PaintController();
   bool isWritingConfirmed = false;
+  bool isWriter = true;
 
   @override
   State<WritingPage> createState() => _WritingPageState();
@@ -45,7 +47,7 @@ class _WritingPageState extends State<WritingPage> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
 
-    const isWriter = false;
+    final isWriter = widget.isWriter;
 
     return Scaffold(
       body: Column(
@@ -173,6 +175,7 @@ class _WritingPageState extends State<WritingPage> {
                 child: Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -184,6 +187,25 @@ class _WritingPageState extends State<WritingPage> {
                                 ?.copyWith(color: Colors.black45),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8, right: 16),
+                          child: TextButton(
+                              onPressed: () async {
+                                await Future.delayed(
+                                    const Duration(seconds: 5));
+                                showDialog(
+                                    context: context,
+                                    builder: (_) =>
+                                        const ResultDialog(title: "回答"));
+                                setState(() {
+                                  widget.isWriter = false;
+                                });
+                              },
+                              child: const Text(
+                                "確定",
+                                style: TextStyle(fontSize: 20),
+                              )),
+                        )
                       ],
                     ),
                     SizedBox(
