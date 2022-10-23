@@ -74,9 +74,9 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   letterSpacing: 1.5),
             )),
-        home: WritingPage(),
+        home: const HomePage(),
         routes: <String, WidgetBuilder>{
-          '/home': (BuildContext context) => HomePage(),
+          // '/home': (BuildContext context) => HomePage(),
           '/roomenter': (BuildContext context) => RoomEnterPage(),
           '/roomroby': (BuildContext context) => RoomRobyPage(),
           '/writing': (BuildContext context) => WritingPage(),
