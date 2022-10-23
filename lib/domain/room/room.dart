@@ -11,7 +11,6 @@ class Room {
     required this.aiPrediction,
     required this.imageLink,
     required this.status,
-    required this.score,
   });
 
   final List<User> users;
@@ -22,7 +21,6 @@ class Room {
   final String aiPrediction;
   final String imageLink;
   final RoomStatus status;
-  final List<Map<String, dynamic>> score;
 
   static Room fromJson(Map<String, dynamic> json) {
     return Room(
@@ -34,12 +32,11 @@ class Room {
       aiPrediction: json['aiPrediction'],
       imageLink: json['imageLink'],
       status: roomStatusFromString(json['status']),
-      score: scoreFromJson(json),
     );
   }
 
   static List<User> usersFromJson(Map<String, dynamic> json) {
-    final List<User> retval = json['users']
+    return json['users']
         .map<User>((dynamic data) => User(
               name: data['name'],
               type: data['type'] == UserType.writer.name
@@ -48,15 +45,6 @@ class Room {
               answer: data['answer'],
               score: data['score'],
             ))
-        .toList();
-    return retval;
-  }
-
-  static List<Map<String, dynamic>> scoreFromJson(Map<String, dynamic> json) {
-    return (json['score'] as List<dynamic>)
-        .map<Map<String, dynamic>>(
-          (e) => {"user": e["user"], "value": e["value"]},
-        )
         .toList();
   }
 

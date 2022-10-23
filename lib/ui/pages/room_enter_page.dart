@@ -9,7 +9,7 @@ import '../styles/app_color.dart';
 class RoomEnterPage extends StatefulWidget {
   const RoomEnterPage({Key? key}) : super(key: key);
 
-  static const routeName = '/roomenter';
+  static const routeName = '/ROOM_ENTER';
 
   @override
   State<RoomEnterPage> createState() => _RoomEnterPageState();
@@ -25,38 +25,43 @@ class _RoomEnterPageState extends State<RoomEnterPage> {
       body: Column(
         children: [
           const HeaderCustomized(title: "ルーム参加"),
+          const SizedBox(height: 40),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-            child: TextFieldCustom(
-              hintText: "ユーザー名を入力",
-              onPressed: () => null,
-              InputController: _controller,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-            child: TextFieldCustom(
-              suffix: "確定",
-              hintText: "ルームIDを入力",
-              onPressed: () => null,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: AppColor.primary,
-                side: const BorderSide(color: AppColor.primary),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6)),
-              ),
-              onPressed: moveNext,
-              child: const SizedBox(
-                width: 190,
-                height: 40,
-                child: Center(child: Text('参加する')),
-              ),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              children: [
+                TextFieldCustom(
+                  onPressed: () => {},
+                  hintText: "ユーザー名を入力",
+                  controller: _controller,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                  child: TextFieldCustom(
+                    onPressed: () => {},
+                    hintText: "ルームIDを入力",
+                    suffix: "確定",
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: AppColor.primary,
+                      side: const BorderSide(color: AppColor.primary),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)),
+                    ),
+                    onPressed: moveNext,
+                    child: const SizedBox(
+                      width: 190,
+                      height: 40,
+                      child: Center(child: Text('参加する')),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

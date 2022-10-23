@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:spajam2022/ui/pages/room_create_page.dart';
-import 'package:spajam2022/ui/styles/app_color.dart';
+import 'package:spajam2022/ui/components/my_outline_button.dart';
 
-import '../components/title_encode.dart';
+import '../components/my_title.dart';
+import 'room_create_page.dart';
 import 'room_enter_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  static const routeName = "/HOME";
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -24,60 +26,28 @@ class _HomePageState extends State<HomePage> {
       ),
       Scaffold(
           backgroundColor: Colors.transparent,
-          body: Center(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 250, 0, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const TitleComponent(),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: AppColor.primary,
-                              side: const BorderSide(color: AppColor.primary),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                            ),
-                            onPressed: () => Navigator.of(context)
-                                .pushNamed(RoomCreatePage.routeName),
-                            child: const SizedBox(
-                              width: 190,
-                              height: 40,
-                              child: Center(child: Text('ルームを作成')),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: AppColor.primary,
-                                side: const BorderSide(color: AppColor.primary),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                              ),
-                              onPressed: () => Navigator.of(context)
-                                  .pushNamed(RoomEnterPage.routeName),
-                              child: const SizedBox(
-                                width: 190,
-                                height: 40,
-                                child: Center(child: Text('ルームに参加')),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+          body: Padding(
+            padding: const EdgeInsets.fromLTRB(30, 250, 30, 100),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const MyTitle(),
+                Column(
+                  children: [
+                    MyOutlineButton(
+                      onPressed: () => Navigator.of(context)
+                          .pushNamed(RoomCreatePage.routeName),
+                      text: "ルームを作成",
                     ),
-                  ),
-                ],
-              ),
+                    const SizedBox(height: 20),
+                    MyOutlineButton(
+                      onPressed: () => Navigator.of(context)
+                          .pushNamed(RoomEnterPage.routeName),
+                      text: "ルームに参加",
+                    ),
+                  ],
+                ),
+              ],
             ),
           ))
     ]);

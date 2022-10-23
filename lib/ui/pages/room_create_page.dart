@@ -8,13 +8,14 @@ import 'room_roby_page.dart';
 class RoomCreatePage extends StatefulWidget {
   const RoomCreatePage({Key? key}) : super(key: key);
 
-  static const routeName = 'roomcrate';
+  static const routeName = 'ROOM_CREATE';
 
   @override
   State<RoomCreatePage> createState() => _RoomCreatePageState();
 }
 
 class _RoomCreatePageState extends State<RoomCreatePage> {
+  // TODO: Do validate. Not allow empty.
   final _controller = TextEditingController();
 
   @override
@@ -25,14 +26,19 @@ class _RoomCreatePageState extends State<RoomCreatePage> {
         children: [
           const HeaderCustomized(title: "ルーム作成"),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-            child: TextFieldCustom(
-              InputController: _controller,
-              hintText: "ユーザー名を入力",
-              suffix: "作成",
-              onPressed: _moveNext,
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              children: [
+                const SizedBox(height: 50),
+                TextFieldCustom(
+                  controller: _controller,
+                  hintText: "ユーザー名を入力",
+                  suffix: "確定",
+                  onPressed: _moveNext,
+                ),
+              ],
             ),
-          ),
+          )
         ],
       ),
     );

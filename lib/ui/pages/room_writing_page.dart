@@ -8,20 +8,20 @@ import '../../constants.dart';
 import '../../domain/user/user.dart';
 import '../components/Painter.dart';
 
-class WritingPage extends StatefulWidget {
-  WritingPage({Key? key}) : super(key: key);
+class RoomWritingPage extends StatefulWidget {
+  RoomWritingPage({Key? key}) : super(key: key);
 
-  static const routeName = '/writing';
+  static const routeName = '/ROOM_WRITING';
 
   final _controller = PaintController();
   bool isWritingConfirmed = false;
   bool isWriter = true;
 
   @override
-  State<WritingPage> createState() => _WritingPageState();
+  State<RoomWritingPage> createState() => _RoomWritingPageState();
 }
 
-class _WritingPageState extends State<WritingPage> {
+class _RoomWritingPageState extends State<RoomWritingPage> {
   late final List<User> users;
   late final int index;
   late final String problem;
@@ -192,7 +192,8 @@ class _WritingPageState extends State<WritingPage> {
                           child: TextButton(
                               onPressed: () async {
                                 await Future.delayed(
-                                    const Duration(seconds: 5));
+                                  const Duration(seconds: 5),
+                                );
                                 showDialog(
                                     context: context,
                                     builder: (_) =>

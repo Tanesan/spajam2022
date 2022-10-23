@@ -2,7 +2,7 @@ class User {
   final String name;
   final UserType type;
   final String answer;
-  final int score;
+  int score;
 
   User({
     required this.name,

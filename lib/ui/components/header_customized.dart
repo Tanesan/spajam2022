@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spajam2022/ui/styles/app_color.dart';
 
 class HeaderCustomized extends StatelessWidget {
   final String title;
@@ -8,42 +9,36 @@ class HeaderCustomized extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
-      width: double.infinity,
-      color: Color(0xffCF9090),
+      color: AppColor.primary,
+      padding: const EdgeInsets.fromLTRB(10, 40, 10, 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(30, 40, 10, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  iconSize: 20,
-                ),
-                IconButton(
-                  icon: Icon(Icons.settings, color: Colors.white),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  iconSize: 20,
-                ),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                onPressed: () => Navigator.pop(context),
+                iconSize: 20,
+              ),
+              const IconButton(
+                icon: Icon(Icons.settings, color: Colors.white),
+                onPressed: null, // TODO: Go to setting page.
+                iconSize: 20,
+              ),
+            ],
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-            child: Text(this.title,
-                textAlign: TextAlign.left,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4
-                    ?.copyWith(color: Colors.white)),
+            padding: const EdgeInsets.only(left: 30),
+            child: Text(
+              title,
+              textAlign: TextAlign.left,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(color: Colors.white),
+            ),
           ),
         ],
       ),

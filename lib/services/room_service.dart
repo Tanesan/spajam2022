@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:spajam2022/domain/room/room_status.dart';
 
 import '../domain/room/room.dart';
 import '../domain/user/user.dart';
@@ -9,7 +10,7 @@ import '../domain/user/user.dart';
 FirebaseDatabase database = FirebaseDatabase.instance;
 
 // FIXME
-const roomId = 'a43y89';
+const roomId = '1';
 
 /// ルームを作成する
 Future<String> createRoom({required String name}) async {
@@ -24,10 +25,7 @@ Future<String> createRoom({required String name}) async {
     'imageLink': '',
     'answer': '',
     'aiPrediction': '',
-    'status': 'pending',
-    'score': [
-      {"user": name, "value": 0}
-    ]
+    'status': RoomStatus.pending.name,
   });
 
   return roomId;
@@ -59,7 +57,6 @@ Future<Room> fetchRoomData() async {
   DatabaseReference ref = FirebaseDatabase.instance.ref('rooms/$roomId');
 
   final snapshot = await ref.get();
-
   if (!snapshot.exists) throw Exception();
 
   final Map<String, dynamic> jsonObj = json.decode(json.encode(snapshot.value));
@@ -77,19 +74,13 @@ Future<void> enterRoom({required String name}) async {
       ...room.usersToJson(),
       {'name': name, 'type': UserType.reader.name, 'answer': '', 'score': 0},
     ],
-    "score": [
-      ...room.score,
-      {"user": name, "value": 0}
-    ]
   });
 }
 
 /// ゲームを開始する（開始を他のユーザーに通知する）
 Future<void> startGame() async {
   DatabaseReference ref = FirebaseDatabase.instance.ref('rooms/$roomId');
-  await ref.update({
-    'status': 'playing',
-  });
+  await ref.update({'status': RoomStatus.playing.name});
 }
 
 /// 問題を追加する
@@ -104,41 +95,77 @@ Future<void> postProblem({
     'problem': problem,
     'problemPrefix': problemPrefix,
     'problemSuffix': problemSuffix,
-    'answer': answer
+    'answer': answer,
   });
 }
 
 /// 書いたものを送信する（他のユーザーに通知する）
 Future<void> postWriting(String imageLink) async {
   DatabaseReference ref = FirebaseDatabase.instance.ref('rooms/$roomId');
-  await ref.update({
-    'imageLink': imageLink,
-  });
+  await ref.update({'imageLink': imageLink});
 }
 
 /// AIの推測をを送信する（他のユーザーに通知する）
 Future<void> postAiPrediction(String aiPrediction) async {
   DatabaseReference ref = FirebaseDatabase.instance.ref('rooms/$roomId');
-  await ref.update({
-    'aiPrediction': aiPrediction,
-  });
+  await ref.update({'aiPrediction': aiPrediction});
 }
 
 /// ユーザーの得点を送信
-Future<void> postUsersScores(Map<String, int> score) async {
+Future<void> postUsersScores() async {
   DatabaseReference ref = FirebaseDatabase.instance.ref('rooms/$roomId');
 
   final room = await fetchRoomData();
 
-  await ref.update({
-    'score': [...room.score, score],
-  });
+  for (var i = 0; i < room.users.length; i++) {
+    final userType = room.users[i].type;
+
+    switch (userType) {
+      case UserType.writer:
+        room.users[i].score += calcWriterScore(room);
+        break;
+      case UserType.reader:
+        room.users[i].score += calcReaderScore(room, i);
+        break;
+      default:
+        throw StateError("Invalid userType: $userType");
+    }
+  }
+
+  await ref.update({'users': room.usersToJson()});
+}
+
+int calcWriterScore(Room room) {
+  var score = 0;
+
+  // 10 points per correctly guessed others.
+  var readers = room.users.where((e) => e.type != UserType.writer);
+  score += readers.where((e) => e.answer == room.answer).length * 10;
+
+  // 30 points if AI prediction is correct.
+  if (room.aiPrediction == room.answer) score += 30;
+
+  return score;
+}
+
+int calcReaderScore(Room room, int index) {
+  var score = 0;
+  var userAnswer = room.users[index].answer;
+
+  // 10 points if correctly guessed.
+  if (userAnswer == room.answer) {
+    score += 10;
+  }
+  // 30 points if incorrectly guessed but matched to AI prediction.
+  else if (userAnswer == room.aiPrediction) {
+    score += 30;
+  }
+
+  return score;
 }
 
 /// ゲームを終了する（終了を他のユーザーに通知する）
 Future<void> finishGame() async {
   DatabaseReference ref = FirebaseDatabase.instance.ref('rooms/$roomId');
-  await ref.update({
-    'status': 'finished',
-  });
+  await ref.update({'status': RoomStatus.finished.name});
 }
