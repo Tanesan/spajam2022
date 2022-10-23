@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:spajam2022/domain/room/room_status.dart';
 
 import '../domain/room/room.dart';
 import '../domain/user/user.dart';
@@ -47,28 +46,7 @@ Stream<Room> listenRoomData() {
     }
 
     final Map<String, dynamic> jsonObj = json.decode(json.encode(data));
-
-    final room = Room(
-      users: jsonObj['users']
-          .map<User>((dynamic data) => User(
-                name: data['name'],
-                type: data['type'] == UserType.writer.name
-                    ? UserType.writer
-                    : UserType.reader,
-                answer: data['answer'],
-                score: data['score'],
-              ))
-          .toList(),
-      problem: jsonObj['problem'],
-      problemPrefix: jsonObj['problemPrefix'],
-      problemSuffix: jsonObj['problemSuffix'],
-      answer: jsonObj['answer'],
-      aiPrediction: jsonObj['aiPrediction'],
-      imageLink: jsonObj['imageLink'],
-      status: roomStatusFromString(jsonObj['status']),
-      score: jsonObj['score'],
-    );
-    print(room);
+    final room = Room.fromJson(jsonObj);
 
     controller.sink.add(room);
   });
@@ -82,33 +60,21 @@ Future<Room> fetchRoomData() async {
 
   final snapshot = await ref.get();
 
-  if (snapshot.exists) {
-    final json = snapshot.value as Map<String, dynamic>;
-    return Room(
-      users: json['users'],
-      problem: json['problem'],
-      problemPrefix: json['problemPrefix'],
-      problemSuffix: json['problemSuffix'],
-      answer: json['answer'],
-      aiPrediction: json['aiPrediction'],
-      imageLink: json['imageLink'],
-      status: json['status'],
-      score: json['score'],
-    );
-  } else {
-    throw Exception();
-  }
+  if (!snapshot.exists) throw Exception();
+
+  final Map<String, dynamic> jsonObj = json.decode(json.encode(snapshot.value));
+  return Room.fromJson(jsonObj);
 }
 
 /// ルームに参加する
-void enterRoom({required String name}) async {
+Future<void> enterRoom({required String name}) async {
   DatabaseReference ref = FirebaseDatabase.instance.ref('rooms/$roomId');
 
   final room = await fetchRoomData();
 
-  await ref.set({
+  await ref.update({
     "users": [
-      ...room.users,
+      ...room.usersToJson(),
       {'name': name, 'type': UserType.reader.name, 'answer': '', 'score': 0},
     ],
     "score": [
