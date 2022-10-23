@@ -22,5 +22,5 @@ class Room {
   final String aiPrediction;
   final String imageLink;
   final RoomStatus status;
-  final Map<String, int> score;
+  final List<Map<String, int>> score;
 }

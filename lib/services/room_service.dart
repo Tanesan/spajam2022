@@ -26,7 +26,9 @@ Future<String> createRoom({required String name}) async {
     'answer': '',
     'aiPrediction': '',
     'status': 'pending',
-    'score': {"user": name, "value": 0}
+    'score': [
+      {"user": name, "value": 0}
+    ]
   });
 
   return roomId;
@@ -109,7 +111,10 @@ void enterRoom({required String name}) async {
       ...room.users,
       {'name': name, 'type': UserType.reader.name, 'answer': '', 'score': 0},
     ],
-    //  TODO
+    "score": [
+      ...room.score,
+      {"user": name, "value": 0}
+    ]
   });
 }
 
