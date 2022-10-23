@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
           '/home': (BuildContext context) => HomePage(),
           '/roomenter': (BuildContext context) => RoomEnterPage(),
           '/roomroby': (BuildContext context) => RoomRobyPage(),
-          '/writing': (BuildContext context) => const WritingPage(),
+          '/writing': (BuildContext context) => WritingPage(),
         });
   }
 }

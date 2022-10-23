@@ -1,48 +1,38 @@
+import 'dart:ui' as ui;
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../../domain/paint_history/paint_history.dart';
 
-/*
- * ペイント
- */
 class Painter extends StatefulWidget {
-  // ペイントコントローラ
   final PaintController paintController;
-  final index;
+  final int index;
 
-  Painter({required this.paintController, this.index})
+  Painter({required this.paintController, required this.index})
       : super(key: ValueKey<PaintController>(paintController));
 
   @override
   State<Painter> createState() => _PainterState();
 }
 
-/*
- * ペイント ステート
- */
 class _PainterState extends State<Painter> {
   final GlobalKey _globalKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // イベント監視
       width: double.infinity,
       height: double.infinity,
-      // イベント監視
       child: GestureDetector(
-        // カスタムペイント
         onPanStart: _onPaintStart,
         onPanUpdate: _onPaintUpdate,
         onPanEnd: _onPaintEnd,
-        // カスタムペイント
         child: RepaintBoundary(
             key: _globalKey,
             child: CustomPaint(
               willChange: true,
-
-              // ペイント部分
               painter: _CustomPainter(
                 widget.paintController._paintHistory,
                 repaint: widget.paintController,
@@ -52,89 +42,49 @@ class _PainterState extends State<Painter> {
     );
   }
 
-  /*
-   * 線ペイントの開始
-   */
   void _onPaintStart(DragStartDetails start) {
     widget.paintController._paintHistory
         .addPaint(_getGlobalToLocalPosition(start.globalPosition));
     widget.paintController._notifyListeners();
   }
 
-  /*
-   * 線ペイント更新
-   */
   void _onPaintUpdate(DragUpdateDetails update) {
     widget.paintController._paintHistory
         .updatePaint(_getGlobalToLocalPosition(update.globalPosition));
     widget.paintController._notifyListeners();
   }
 
-  /*
-   * 線ペイントの終了
-   */
   void _onPaintEnd(DragEndDetails end) {
     widget.paintController._paintHistory.endPaint();
     widget.paintController._notifyListeners();
-
-    // _exportToImage();
+    _exportToImage();
   }
 
-  // void _exportToImage() async {
-  //   // 現在描画されているWidgetを取得する
-  //   RenderRepaintBoundary boundary =
-  //       _globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-  //
-  //   while (true) {
-  //     if (boundary.debugNeedsPaint) {
-  //       await Future.delayed(Duration(milliseconds: 20));
-  //       continue;
-  //     }
-  //     break;
-  //   }
-  //
-  //   // 取得したWidgetからイメージファイルをキャプチャする
-  //   var image = await boundary.toImage(
-  //     pixelRatio: 3.0,
-  //   );
-  //
-  //   // 以下はお好みで
-  //   // PNG形式化
-  //   ByteData? byteData = await image.toByteData(
-  //     format: ui.ImageByteFormat.png,
-  //   );
-  //   // バイトデータ化
-  //   final _pngBytes = byteData!.buffer.asUint8List();
-  //   // BASE64形式化
-  //   final _base64 = base64Encode(_pngBytes);
-  //
-  //   FirebaseStorage storage = FirebaseStorage.instance;
-  //   try {
-  //     await storage
-  //         .ref("paintings/${widget.roomId}_${widget.paintingIndex}.png")
-  //         .putData(_pngBytes);
-  //     FirebaseFirestore.instance
-  //         .collection("updates")
-  //         .doc(widget.roomId)
-  //         .collection("updates")
-  //         .doc(widget.paintingIndex.toString())
-  //         .update({'update': math.Random().nextInt(99999999).toString()});
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+  void _exportToImage() async {
+    final boundary =
+        _globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
 
-  /*
-   * ローカルのオフセットへ変換
-   */
+    while (true) {
+      if (!boundary.debugNeedsPaint) break;
+
+      await Future.delayed(const Duration(milliseconds: 20));
+      continue;
+    }
+
+    final image = await boundary.toImage(pixelRatio: 3.0);
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final pngBytes = byteData!.buffer.asUint8List();
+
+    final storage = FirebaseStorage.instance;
+    await storage.ref("writings/${widget.index}.png").putData(pngBytes);
+    // TODO: RealtimeDatabaseを更新
+  }
+
   Offset _getGlobalToLocalPosition(Offset global) {
     return (context.findRenderObject() as RenderBox).globalToLocal(global);
   }
 }
 
-/*
- * カスタムペイント
- */
 class _CustomPainter extends CustomPainter {
   final PaintHistory _paintHistory;
 
@@ -150,9 +100,6 @@ class _CustomPainter extends CustomPainter {
   bool shouldRepaint(_CustomPainter oldDelegate) => true;
 }
 
-/*
- * ペイントコントローラ
- */
 class PaintController extends ChangeNotifier {
   // ペイント履歴
   PaintHistory _paintHistory = PaintHistory();
