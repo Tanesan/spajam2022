@@ -7,9 +7,11 @@ import '../../domain/user/user.dart';
 import '../components/Painter.dart';
 
 class WritingPage extends StatefulWidget {
-  final _controller = PaintController();
-
   WritingPage({Key? key}) : super(key: key);
+
+  static const routeName = '/writing';
+
+  final _controller = PaintController();
 
   @override
   State<WritingPage> createState() => _WritingPageState();

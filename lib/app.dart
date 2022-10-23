@@ -5,6 +5,8 @@ import 'package:spajam2022/ui/pages/room_enter_page.dart';
 import 'package:spajam2022/ui/pages/room_roby_page.dart';
 import 'package:spajam2022/ui/pages/writing_page.dart';
 
+import 'ui/pages/room_create_page.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -77,9 +79,13 @@ class MyApp extends StatelessWidget {
         home: const HomePage(),
         routes: <String, WidgetBuilder>{
           // '/home': (BuildContext context) => HomePage(),
-          '/roomenter': (BuildContext context) => RoomEnterPage(),
-          '/roomroby': (BuildContext context) => RoomRobyPage(),
-          '/writing': (BuildContext context) => WritingPage(),
+          RoomCreatePage.routeName: (BuildContext context) =>
+              const RoomCreatePage(),
+          RoomEnterPage.routeName: (BuildContext context) =>
+              const RoomEnterPage(),
+          RoomRobyPage.routeName: (BuildContext context) =>
+              const RoomRobyPage(),
+          WritingPage.routeName: (BuildContext context) => WritingPage(),
         });
   }
 }

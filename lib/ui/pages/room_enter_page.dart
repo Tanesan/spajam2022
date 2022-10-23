@@ -6,6 +6,8 @@ import '../components/text_field_custom.dart';
 class RoomEnterPage extends StatefulWidget {
   const RoomEnterPage({Key? key}) : super(key: key);
 
+  static const routeName = '/roomenter';
+
   @override
   State<RoomEnterPage> createState() => _RoomEnterPageState();
 }

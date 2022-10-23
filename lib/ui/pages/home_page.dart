@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:spajam2022/ui/pages/room_create_page.dart';
 import 'package:spajam2022/ui/styles/app_color.dart';
 
 import '../components/title_encode.dart';
+import 'room_enter_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,16 +38,15 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              primary: Colors.white,
+                              foregroundColor: Colors.white,
                               backgroundColor: AppColor.primary,
                               side: const BorderSide(color: AppColor.primary),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6),
                               ),
                             ),
-                            onPressed: () {
-                              Navigator.of(context).pushNamed('/roomroby');
-                            },
+                            onPressed: () => Navigator.of(context)
+                                .pushNamed(RoomCreatePage.routeName),
                             child: const SizedBox(
                               width: 190,
                               height: 40,
@@ -62,9 +63,8 @@ class _HomePageState extends State<HomePage> {
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.of(context).pushNamed('/roomenter');
-                              },
+                              onPressed: () => Navigator.of(context)
+                                  .pushNamed(RoomEnterPage.routeName),
                               child: const SizedBox(
                                 width: 190,
                                 height: 40,
