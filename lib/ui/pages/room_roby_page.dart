@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:spajam2022/domain/room/room.dart';
 import 'package:spajam2022/services/room_service.dart';
+import 'package:spajam2022/ui/pages/writing_page.dart';
 import 'package:spajam2022/ui/styles/app_color.dart';
 
+import '../../constants.dart';
 import '../components/header_customized.dart';
 import '../components/text_field_custom.dart';
 
@@ -81,29 +83,27 @@ class _RoomRobyPageState extends State<RoomRobyPage> {
                                 final users = snapshot.data!.users;
 
                                 return ListView.builder(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                    padding: const EdgeInsets.all(0),
                                     itemCount: users.length,
                                     shrinkWrap: true,
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       final user = users[index];
                                       return Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 20, 0, 0),
-                                          child: TextFieldCustom(
-                                            hintText: "ルームID",
-                                            onPressed: () {},
-                                            InputController:
-                                                TextEditingController(
-                                              text: user.name,
-                                            ),
-                                            // prefixIcon: CircleAvatar(
-                                            //   backgroundColor:
-                                            //       Colors.transparent,
-                                            //   child: Constants.avatars[index],
-                                            // ),
-                                          ));
+                                        padding: const EdgeInsets.only(top: 20),
+                                        child: TextFieldCustom(
+                                          hintText: "ルームID",
+                                          onPressed: () {},
+                                          InputController:
+                                              TextEditingController(
+                                            text: user.name,
+                                          ),
+                                          prefixIcon: CircleAvatar(
+                                            backgroundColor: Colors.transparent,
+                                            child: Constants.avatars[index],
+                                          ),
+                                        ),
+                                      );
                                     });
                               }),
                         ),
@@ -121,9 +121,8 @@ class _RoomRobyPageState extends State<RoomRobyPage> {
                           borderRadius: BorderRadius.circular(6),
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/home');
-                      },
+                      onPressed: () => Navigator.of(context)
+                          .pushNamed(WritingPage.routeName),
                       child: const SizedBox(
                         width: 190,
                         height: 40,
