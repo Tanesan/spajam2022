@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spajam2022/ui/styles/app_color.dart';
 
 import '../components/title_encode.dart';
 
@@ -23,25 +24,21 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.transparent,
           body: Center(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(0, 250, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 250, 0, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TitleComponent(),
+                  const TitleComponent(),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
                     child: Center(
                       child: Column(
                         children: [
                           OutlinedButton(
-                            child: Container(
-                                width: 190,
-                                height: 40,
-                                child: Center(child: Text('ルームを作成'))),
                             style: OutlinedButton.styleFrom(
                               primary: Colors.white,
-                              backgroundColor: Color(0xffCF9090),
-                              side: BorderSide(color: Color(0xffCF9090)),
+                              backgroundColor: AppColor.primary,
+                              side: const BorderSide(color: AppColor.primary),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6),
                               ),
@@ -49,17 +46,18 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               Navigator.of(context).pushNamed('/roomroby');
                             },
+                            child: const SizedBox(
+                              width: 190,
+                              height: 40,
+                              child: Center(child: Text('ルームを作成')),
+                            ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                             child: OutlinedButton(
-                              child: Container(
-                                  width: 190,
-                                  height: 40,
-                                  child: Center(child: Text('ルームに参加'))),
                               style: OutlinedButton.styleFrom(
-                                primary: Color(0xffCF9090),
-                                side: BorderSide(color: Color(0xffCF9090)),
+                                foregroundColor: AppColor.primary,
+                                side: const BorderSide(color: AppColor.primary),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6),
                                 ),
@@ -67,6 +65,11 @@ class _HomePageState extends State<HomePage> {
                               onPressed: () {
                                 Navigator.of(context).pushNamed('/roomenter');
                               },
+                              child: const SizedBox(
+                                width: 190,
+                                height: 40,
+                                child: Center(child: Text('ルームに参加')),
+                              ),
                             ),
                           ),
                         ],
